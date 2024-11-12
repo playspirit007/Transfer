@@ -235,10 +235,12 @@ public class repetition_exercise {
 				hpkaempfer2 = hpkaempfer2 - hpVerlust;
 			} else if (hpVerlust <= 1) {
 				hpVerlust = 0;
-			} else if (hpkaempfer1 <= 0 || hpkaempfer2 <= 0) {
-				continue;
 			}
 
+			if (hpkaempfer1 <= 0 || hpkaempfer2 <= 0) {
+				break;
+			}
+			
 			System.out.println("Spieler 1 hat bei Spieler 2 " + hpVerlust + " Schaden verursacht.");
 			System.out.println("Spieler 1 hat noch " + hpkaempfer1 + " Leben übrig.");
 			System.out.println("Spieler 2 hat noch " + hpkaempfer2 + " Leben übrig.");
@@ -403,6 +405,11 @@ public class repetition_exercise {
 				}
 
 			}
+			
+			if (hpkaempfer1 <= 0 || hpkaempfer2 <= 0) {
+				break;
+				}
+			
 				System.out.println("Spieler 2 hat bei Spieler 1 " + hpVerlust + " Schaden verursacht.");
 				System.out.println("Spieler 1 hat noch " + hpkaempfer1 + " Leben übrig.");
 				System.out.println("Spieler 2 hat noch " + hpkaempfer2 + " Leben übrig.");
@@ -410,12 +417,12 @@ public class repetition_exercise {
 				Schaden = 0;
 				Verteidigung = 0;
 			
+		}
 
 			if (hpkaempfer2 < 0) {
 				System.out.println("Spieler 1 hat gewonnen und " + hpkaempfer1 + " Leben übrig.");
 			} else if (hpkaempfer1 < 0) {
 				System.out.println("Spieler 2 hat gewonnen und " + hpkaempfer2 + " Leben übrig.");
 			}
-		}
 	}
 }
