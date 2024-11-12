@@ -235,7 +235,7 @@ public class repetition_exercise {
 				hpkaempfer2 = hpkaempfer2 - hpVerlust;
 			} else if (hpVerlust <= 1) {
 				hpVerlust = 0;
-			} else if (hpkaempfer1 < 0 || hpkaempfer2 < 0) {
+			} else if (hpkaempfer1 <= 0 || hpkaempfer2 <= 0) {
 				continue;
 			}
 
