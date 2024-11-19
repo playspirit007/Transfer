@@ -9,7 +9,7 @@ package model;
  */
 public class LightBulb {
 
-  private final String color;
+  private String color;
 
   public LightBulb() {
     color = "weiß";
