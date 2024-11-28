@@ -44,6 +44,8 @@ public class D17_ArrayList {
 
     /* Liste ausgeben */
     System.out.println(names);
+    
+    System.out.println(names.get(2));
 
   }
 
