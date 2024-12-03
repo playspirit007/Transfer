@@ -9,7 +9,7 @@ package model;
  */
 public class LightBulb {
 
-  private String color;
+  private final String color;
 
   public LightBulb() {
     color = "weiß";
@@ -19,8 +19,17 @@ public class LightBulb {
     this.color = color;
   }
 
+  public boolean equals(LightBulb other) {
+    return color.equals(other.color);
+  }
+
   public String getColor() {
     return color;
+  }
+
+  @Override
+  public String toString() {
+    return "LightBulb [color=" + color + "]";
   }
 
 }

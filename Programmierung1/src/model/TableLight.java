@@ -7,18 +7,35 @@ package model;
  * @version 1.0
  *
  */
-public class TableLight {
+public class TableLight extends Light {
+
+  public final static String DESCRIPTION = "Tischleuchte";
+  private static int numberOfDices;
+
+  public static int getNumberOfDices() {
+    return numberOfDices;
+  }
 
   private boolean isConnected;
-  private boolean isOn;
+  private final PlugType plugType;
   private LightBulb lightBulb;
 
   public TableLight() {
+    plugType = PlugType.TYPE_F;
     lightBulb = new LightBulb();
+    numberOfDices++;
   }
 
   public TableLight(LightBulb lightBulb) {
+    plugType = PlugType.TYPE_F;
     this.lightBulb = lightBulb;
+    numberOfDices++;
+  }
+
+  public TableLight(LightBulb lightBulb, PlugType plugType) {
+    this.plugType = plugType;
+    this.lightBulb = lightBulb;
+    numberOfDices++;
   }
 
   /**
@@ -37,12 +54,12 @@ public class TableLight {
     return lightBulb;
   }
 
-  public boolean isConnected() {
-    return isConnected;
+  public PlugType getPlugType() {
+    return plugType;
   }
 
-  public boolean isOn() {
-    return isOn;
+  public boolean isConnected() {
+    return isConnected;
   }
 
   /**
@@ -50,6 +67,7 @@ public class TableLight {
    *
    * @return Table Light is shining (true) or not (false)
    */
+  @Override
   public boolean isShining() {
     if (isConnected && isOn && lightBulb != null) {
       return true;
@@ -70,20 +88,6 @@ public class TableLight {
    */
   public void pullThePlug() {
     isConnected = false;
-  }
-
-  /**
-   * Switches the Table Light off
-   */
-  public void switchOff() {
-    isOn = false;
-  }
-
-  /**
-   * Switches the Table Light on
-   */
-  public void switchOn() {
-    isOn = true;
   }
 
 }
