@@ -3,10 +3,10 @@ package Übungsaufgaben.Christbaum;
 public class Candle {
 
 	protected boolean isBuring;
-	private final String colour;
+	private final String color;
 
-	public Candle(String colur) {
-		this.colour = colour;
+	public Candle(String color) {
+		this.color = color;
 		this.isBuring = false;
 	}
 	
@@ -16,6 +16,10 @@ public class Candle {
 	
 	public void turnOffACandle() {
 		this.isBuring = false;
+	}
+
+	public String getColor() {
+		return color;
 	}
 
 }

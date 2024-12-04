@@ -1,5 +1,18 @@
 package Übungsaufgaben.Kreatur;
 
 public enum Type {
-	MONSTER("MONSTER"), SKELETON("SKELETON"), VAMPIRE("VAMPIRE"), ZOMBIE("ZOMBIE");
-	}
+    MONSTER("Monster"),
+    SKELETON("Skeleton"),
+    VAMPIRE("Vampire"),
+    ZOMBIE("Zombie");
+
+    private final String displayName;
+
+    Type(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+}
