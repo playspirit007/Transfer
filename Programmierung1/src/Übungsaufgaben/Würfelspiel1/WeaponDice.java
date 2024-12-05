@@ -7,6 +7,11 @@ public class WeaponDice {
 
 	public void rollTheDice() {
 		Random myRandom = new Random();
-		weapon = myRandom.
+		int xrandom = myRandom.nextInt(1, 4);
+		this.weapon = Weapon.values()[xrandom];
+	}
+
+	public Weapon getWeapon() {
+		return weapon;
 	}
 }
