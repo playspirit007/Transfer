@@ -8,9 +8,9 @@ public class ParkingGarage {
 	}
 
 	public String parkIn(Car car, int parkingSpotNumber) {
-		String Meldung;
+		String Meldung = "";
 		if (parkingSpots[parkingSpotNumber] == null) {
-			parkingSpots[parkingSpotNumber] = car;
+			parkingSpots[parkingSpotNumber].setVehicle(car);
 			Meldung = "Das Auto wurde erfolgreich geparkt";
 		} else if (parkingSpots[parkingSpotNumber] != null) {
 			Meldung = "Das Auto konnte nicht geparkt werden da dieser Parkplatz bereits besetzt ist.";
