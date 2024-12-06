@@ -14,5 +14,9 @@ public class Player {
 	}
 	public Card getCardWithHihestValue() {
 		
+		
+		Card highestCard = null;
+		return highestCard;
+		
 	}
 }
