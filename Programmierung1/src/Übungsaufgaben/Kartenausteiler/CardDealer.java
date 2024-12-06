@@ -8,7 +8,7 @@ public class CardDealer {
 	private final Player player2;
 	
 	public CardDealer(ArrayList<Card> deck, Player player1, Player player2) {
-		this.deck = deck;
+		this.deck = new ArrayList<>();
 		this.player1 = player1;
 		this.player2 = player2;
 	}
