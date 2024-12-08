@@ -1,5 +1,7 @@
 package Übungsaufgaben.Polymorphism;
 
+import java.util.ArrayList;
+
 public class Truck extends Vehicle{
 	private final int cargo;
 	private boolean isTransformed;
@@ -17,11 +19,21 @@ public class Truck extends Vehicle{
 	public void transform() {
 		if (this.isTransformed == true) {
 			this.isTransformed = false;
+			System.out.println(getMake() + " " + getModel() + " verwandelt sich in ein Lastenwagen zurück.");
 		} else if (this.isTransformed == false) {
 			this.isTransformed = true;
+			System.out.println(getMake() + " " + getModel() + " verwandelt sich in ein Autobot.");
+		}
+	}
+	public void transformAllTrucks(ArrayList<Vehicle> allVehicles) {
+		for (Vehicle c : allVehicles) {
+			if (c instanceof Truck) {
+				((Truck) c).isTransformed = true;
+				System.out.println(((Truck) c).getMake() + " " + ((Truck) c).getModel() + " hat sich transformiert!");
+			}
 		}
 	}
 	public String toString() {
-		return(getMake() + " " + getModel() + " (" + getEngine() + ", " + getCargo());
+		return(getMake() + " " + getModel() + " (" + getEngine() + ", " + getCargo() + "t)");
 	}
 }

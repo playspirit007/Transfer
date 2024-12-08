@@ -1,20 +1,24 @@
 package Übungsaufgaben.Polymorphism;
 
-public class Car extends Vehicle{
+public class Car extends Vehicle {
 	private final int seats;
-	
-	public Car(String model, Engine engine, int seats) {
-		super(model, engine);
+
+	public Car(String make, String model, Engine engine, int seats) {
+		super(make, model, engine);
 		this.seats = seats;
 	}
+
 	public int getSeats() {
 		return this.seats;
 	}
+
 	public void doATurboBoost() {
-		double x = getSpeedInKmh();
-		int y = (int) x;
-		accelerate(y);
-	} public String toString() {
+		speedInKmh *= 2;
+		System.out.println(
+				getMake() + " " + getModel() + " macht einen Turboboost und beschleunigt auf " + speedInKmh + " km/h");
+	}
+
+	public String toString() {
 		return (getMake() + " " + getModel() + " (" + getEngine() + ", " + getSeats() + " Sitzplätze" + ")");
 	}
 }

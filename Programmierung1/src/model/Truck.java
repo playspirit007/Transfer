@@ -17,12 +17,20 @@ public class Truck extends Vehicle {
 
   @Override
   public String toString() {
-    return "Truck [isTransformed=" + isTransformed + ", make=" + getMake() + ", model=" + getModel()
+    return "Truck [isTransformed=" + isTransformed() + ", make=" + getMake() + ", model=" + getModel()
         + ", speedInKmh=" + getSpeedInKmh() + "]";
   }
 
   public void transform() {
-    isTransformed = !isTransformed;
+    setTransformed(!isTransformed());
   }
+
+public boolean isTransformed() {
+	return isTransformed;
+}
+
+public void setTransformed(boolean isTransformed) {
+	this.isTransformed = isTransformed;
+}
 
 }
