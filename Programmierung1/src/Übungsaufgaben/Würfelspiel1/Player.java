@@ -2,23 +2,19 @@ package Übungsaufgaben.Würfelspiel1;
 
 public class Player {
 	private final String name;
-	private int points;
+	private int Points;
 	
-	public Player(String name, int points) {
+	public Player(String name, int Points) {
 		this.name = name;
-		this.points = points;
+		this.Points = Points;
 	}
-	
 	public void reducePoints(int value) {
-		this.points -= value;
-		if (points < 0) {
-            this.points = 0;
-		}
+		this.Points -= value;
+	}
+	public int getPoints() {
+		return this.Points;
 	}
 	public String getName() {
 		return this.name;
-	}
-	public int getPoints() {
-		return this.points;
 	}
 }
