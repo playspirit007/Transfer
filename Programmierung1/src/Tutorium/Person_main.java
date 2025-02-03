@@ -15,6 +15,8 @@ public class Person_main {
 		
 		System.out.println(philipp.toString());
 		System.out.println(eva.toString());
+		
+		System.out.println("Hello World");
 	}
 
 }
