@@ -9,6 +9,7 @@ public class MainClass {
 	private WeaponDice weaponDice;
 
 	public static void main(String[] agrs) {
+
 		WeaponDice weaponDice = new WeaponDice();
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Spieler 1, gib bitte Deinen Namen ein:");
@@ -40,15 +41,14 @@ public class MainClass {
 			} else if (total1 == total2) {
 				System.out.println("Kein Schaden verursacht!");
 			}
-		
+
 			System.out.println("");
 		}
-		
-		
-	if (player1.getPoints() > 0) {
-		System.out.println(player1.getName() + " gewinnt");
-	} else {
-		System.out.println(player2.getName() + " gewinnt");
-	}
+
+		if (player1.getPoints() > 0) {
+			System.out.println(player1.getName() + " gewinnt");
+		} else {
+			System.out.println(player2.getName() + " gewinnt");
+		}
 	}
 }
