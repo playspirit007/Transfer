@@ -18,7 +18,6 @@ public class Main {
     Matrix = new String[Zeilen][Laenge];
 
     Functions.readFileToMatrix(Labirinth, Matrix, Zeilen, Laenge);
-    Functions.printMatrix(Matrix);
 
     boolean MouseWalk = true;
     while (MouseWalk) {

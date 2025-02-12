@@ -18,14 +18,14 @@ public class Functions {
       i++;
     }
     Functions.printMatrix(matrix);
-    // Überprüfen, ob das Ziel 'X' erreicht wurde
     Scanner myScanner = new Scanner(System.in);
+    // Überprüfen, ob das Ziel "X" erreicht wurde
     if (matrix[row][col].equals("X")) {
       matrix[row][col] = "O"; // Ziel erreicht, "O" setzen
       return false; // Maus hat das Ziel erreicht, daher keine weitere Bewegung nötig
     }
 
-    // Wenn die aktuelle Position leer ist und nicht besucht wurde, setze die Maus 'O'
+    // Wenn die aktuelle Position leer ist und nicht besucht wurde, setze die Maus "O"
     if (matrix[row][col].equals(" ") || matrix[row][col].equals(".")) {
       matrix[row][col] = "O"; // Setze das "O" an der aktuellen Position
     } else {
