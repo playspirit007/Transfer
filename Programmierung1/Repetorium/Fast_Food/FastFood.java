@@ -6,10 +6,11 @@ public class FastFood extends Food {
   private final boolean isVegetarian;
   private final ArrayList<Integer> ratings;
 
-  public FastFood(boolean isVegetarian) {
+  public FastFood(
+      String name, FoodCategory foodCategory, double calorificValueInKcal, boolean isVegetarian) {
     super(name, foodCategory, calorificValueInKcal);
     this.isVegetarian = isVegetarian;
-    ratings = new ArrayList<>();
+    this.ratings = new ArrayList<>();
   }
 
   public void addRating(int rating) {
@@ -25,5 +26,14 @@ public class FastFood extends Food {
     }
     average = (average / i);
     return average;
+  }
+
+  @Override
+  public String toString() {
+    return super.toString()
+        + " | Vegetarian: "
+        + isVegetarian
+        + " | Avg. Rating: "
+        + getAverageRating();
   }
 }
