@@ -11,6 +11,19 @@ public class ShoppingCart {
   }
 
   public void createItem(Goods goods, int amount) {
-    this.items.add(goods);
+    Item item = new Item(goods, amount);
+    this.items.add(item);
+  }
+
+  public double getInTotalEuro() {
+    double x = 0;
+    for (Item item : items) {
+      x += item.getSubTotalInEuro();
+    }
+    return x;
+  }
+
+  public ArrayList<Item> getItems() {
+    return items;
   }
 }

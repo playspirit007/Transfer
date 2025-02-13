@@ -8,4 +8,8 @@ public class Goods extends Product {
     super(id, description, unit, priceInEuro);
     this.classOfGoods = classOfGoods;
   }
+
+  public int getId() {
+    return this.id;
+  }
 }

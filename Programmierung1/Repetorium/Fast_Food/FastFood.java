@@ -7,8 +7,8 @@ public class FastFood extends Food {
   private final ArrayList<Integer> ratings;
 
   public FastFood(
-      String name, FoodCategory foodCategory, double calorificValueInKcal, boolean isVegetarian) {
-    super(name, foodCategory, calorificValueInKcal);
+      String name, FoodCategory meat, double calorificValueInKcal, boolean isVegetarian) {
+    super(name, meat, calorificValueInKcal);
     this.isVegetarian = isVegetarian;
     this.ratings = new ArrayList<>();
   }

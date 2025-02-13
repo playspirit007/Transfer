@@ -1,16 +1,14 @@
 package Fast_Food;
 
-import Übungsaufgaben.Würfelspiel4.FoodCategory;
-
 public class Food {
 
   private final String name;
-  private final FoodCategory foodCategory;
+  private final Fast_Food.FoodCategory foodCategory;
   private final double calorificValueInKcal;
 
-  public Food(String name, FoodCategory foodCategory, double calorificValueInKcal) {
+  public Food(String name, Fast_Food.FoodCategory meat, double calorificValueInKcal) {
     this.name = name;
-    this.foodCategory = foodCategory;
+    this.foodCategory = meat;
     this.calorificValueInKcal = calorificValueInKcal;
   }
 
@@ -18,7 +16,7 @@ public class Food {
     return this.name;
   }
 
-  public FoodCategory getFoodCategory() {
+  public Fast_Food.FoodCategory getFoodCategory() {
     return this.foodCategory;
   }
 

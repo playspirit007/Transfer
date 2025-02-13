@@ -11,30 +11,21 @@ public class Functions {
 
   private static Scanner myScanner = new Scanner(System.in);
 
-  public static boolean solveLabyrinth(String[][] matrix, int row, int col, Set<String> visited) {
+  public static boolean solveLabyrinth(String[][] matrix, int row, int col, Set<String> visited)
+      throws InterruptedException {
     // Ziel erreicht?
     if (matrix[row][col].equals("X")) {
       matrix[row][col] = "O";
       System.out.println("Die Maus hat das Labyrinth verlassen!");
-      // Beendet die Schleife, wenn die Maus das Ziel erreicht hat
       return false;
     }
-
-    myScanner.nextLine();
-    System.out.print("\033[H\033[2J");
-    System.out.flush();
-    //    int i = 1;
-    //    while (i < 7) {
-    //      System.out.println(" ");
-    //      i++;
-    //    }
 
     // Position als String speichern (z. B. "2,3")
     String position = row + "," + col;
 
     // Prüfen, ob die Position bereits besucht wurde (Zyklus erkannt)
     if (visited.contains(position)) {
-      return true; // Zyklus erkannt, daher zurückgehen
+      return true;
     }
 
     // Position als besucht markieren
@@ -47,32 +38,41 @@ public class Functions {
       return true;
     }
 
-    // Matrix nach jedem Schritt anzeigen
+    Thread.sleep(100);
+    System.out.print("\033[H\033[2J"); // ANSI Clear Screen
+    System.out.flush();
+
+    int i = 1;
+    while (i < 8) {
+      System.out.println(" ");
+      i++;
+    }
+
     printMatrix(matrix);
 
-    // Rekursive Aufrufe in alle Richtungen
-    if (row + 1 < matrix.length && !matrix[row + 1][col].equals("*")) {
-      if (!solveLabyrinth(matrix, row + 1, col, visited)) {
-        return false;
-      }
+    // Rekursive Aufrufe in alle Richtungen ohne doppelte if-Bedingungen
+    if (row + 1 < matrix.length
+        && !matrix[row + 1][col].equals("*")
+        && !solveLabyrinth(matrix, row + 1, col, visited)) {
+      return false;
     }
 
-    if (col + 1 < matrix[0].length && !matrix[row][col + 1].equals("*")) {
-      if (!solveLabyrinth(matrix, row, col + 1, visited)) {
-        return false;
-      }
+    if (col + 1 < matrix[0].length
+        && !matrix[row][col + 1].equals("*")
+        && !solveLabyrinth(matrix, row, col + 1, visited)) {
+      return false;
     }
 
-    if (row - 1 >= 0 && !matrix[row - 1][col].equals("*")) {
-      if (!solveLabyrinth(matrix, row - 1, col, visited)) {
-        return false;
-      }
+    if (row - 1 >= 0
+        && !matrix[row - 1][col].equals("*")
+        && !solveLabyrinth(matrix, row - 1, col, visited)) {
+      return false;
     }
 
-    if (col - 1 >= 0 && !matrix[row][col - 1].equals("*")) {
-      if (!solveLabyrinth(matrix, row, col - 1, visited)) {
-        return false;
-      }
+    if (col - 1 >= 0
+        && !matrix[row][col - 1].equals("*")
+        && !solveLabyrinth(matrix, row, col - 1, visited)) {
+      return false;
     }
 
     // Backtracking: Position als nicht Teil des endgültigen Pfads markieren

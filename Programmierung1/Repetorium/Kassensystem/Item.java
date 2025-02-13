@@ -18,4 +18,10 @@ public class Item {
     double x = this.amount * goods.getPrice();
     return x;
   }
+
+  @Override
+  public String toString() {
+    System.out.println("Good: " + this.goods + " Menge: " + this.amount);
+    return null;
+  }
 }

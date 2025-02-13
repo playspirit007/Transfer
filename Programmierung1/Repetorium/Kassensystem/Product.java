@@ -2,7 +2,7 @@ package Kassensystem;
 
 public class Product {
 
-  private final int id;
+  protected final int id;
   private final String description;
   private String unit;
   private double priceInEuro;
