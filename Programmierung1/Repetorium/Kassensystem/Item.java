@@ -9,6 +9,13 @@ public class Item {
     this.goods = goods;
     this.amount = amount;
   }
-  
-  public 
+
+  public void setAmount(int amount) {
+    this.amount = amount;
+  }
+
+  public double getSubTotalInEuro() {
+    double x = this.amount * goods.getPrice();
+    return x;
+  }
 }

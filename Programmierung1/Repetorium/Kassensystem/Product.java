@@ -17,4 +17,8 @@ public class Product {
   public void setPriceInEuro(double priceInEuro) {
     this.priceInEuro = priceInEuro;
   }
+
+  public double getPrice() {
+    return this.priceInEuro;
+  }
 }

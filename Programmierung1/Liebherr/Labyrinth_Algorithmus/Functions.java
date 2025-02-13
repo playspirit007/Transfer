@@ -5,65 +5,81 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Functions {
 
   private static Scanner myScanner = new Scanner(System.in);
 
-  public static boolean solveLabyrinth(String[][] matrix, int row, int col) {
+  public static boolean solveLabyrinth(String[][] matrix, int row, int col, Set<String> visited) {
+    // Ziel erreicht?
+    if (matrix[row][col].equals("X")) {
+      matrix[row][col] = "O";
+      System.out.println("Die Maus hat das Labyrinth verlassen!");
+      // Beendet die Schleife, wenn die Maus das Ziel erreicht hat
+      return false;
+    }
+
     myScanner.nextLine();
     int i = 1;
     while (i < 7) {
       System.out.println(" ");
       i++;
     }
-    Functions.printMatrix(matrix);
-    Scanner myScanner = new Scanner(System.in);
-    // Überprüfen, ob das Ziel "X" erreicht wurde
-    if (matrix[row][col].equals("X")) {
-      matrix[row][col] = "O"; // Ziel erreicht, "O" setzen
-      return false; // Maus hat das Ziel erreicht, daher keine weitere Bewegung nötig
+
+    // Position als String speichern (z. B. "2,3")
+    String position = row + "," + col;
+
+    // Prüfen, ob die Position bereits besucht wurde (Zyklus erkannt)
+    if (visited.contains(position)) {
+      return true; // Zyklus erkannt, daher zurückgehen
     }
 
-    // Wenn die aktuelle Position leer ist und nicht besucht wurde, setze die Maus "O"
+    // Position als besucht markieren
+    visited.add(position);
+
+    // Setze die Maus "O", wenn erlaubt
     if (matrix[row][col].equals(" ") || matrix[row][col].equals(".")) {
-      matrix[row][col] = "O"; // Setze das "O" an der aktuellen Position
+      matrix[row][col] = "O";
     } else {
-      return true; // Wenn die Position bereits besucht wurde, gehe zurück
+      return true;
     }
 
-    // Überprüfe, ob es nach unten geht und kein Block (kein '*')
+    // Matrix nach jedem Schritt anzeigen
+    printMatrix(matrix);
+
+    // Rekursive Aufrufe in alle Richtungen
     if (row + 1 < matrix.length && !matrix[row + 1][col].equals("*")) {
-      if (!solveLabyrinth(matrix, row + 1, col)) { // Rekursiver Aufruf nach unten
-        return false; // Wenn Ziel erreicht, gebe false zurück
+      if (!solveLabyrinth(matrix, row + 1, col, visited)) {
+        return false;
       }
     }
 
-    // Überprüfe, ob es nach rechts geht und kein Block (kein '*')
     if (col + 1 < matrix[0].length && !matrix[row][col + 1].equals("*")) {
-      if (!solveLabyrinth(matrix, row, col + 1)) { // Rekursiver Aufruf nach rechts
-        return false; // Wenn Ziel erreicht, gebe false zurück
+      if (!solveLabyrinth(matrix, row, col + 1, visited)) {
+        return false;
       }
     }
 
-    // Überprüfe, ob es nach oben geht und kein Block (kein '*')
     if (row - 1 >= 0 && !matrix[row - 1][col].equals("*")) {
-      if (!solveLabyrinth(matrix, row - 1, col)) { // Rekursiver Aufruf nach oben
-        return false; // Wenn Ziel erreicht, gebe false zurück
+      if (!solveLabyrinth(matrix, row - 1, col, visited)) {
+        return false;
       }
     }
 
-    // Überprüfe, ob es nach links geht und kein Block (kein '*')
     if (col - 1 >= 0 && !matrix[row][col - 1].equals("*")) {
-      if (!solveLabyrinth(matrix, row, col - 1)) { // Rekursiver Aufruf nach links
-        return false; // Wenn Ziel erreicht, gebe false zurück
+      if (!solveLabyrinth(matrix, row, col - 1, visited)) {
+        return false;
       }
     }
 
-    // Wenn keine gültige Richtung funktioniert hat, gebe true zurück (backtracking)
-    matrix[row][col] = "."; // Markiere die Position als besucht
-    return true; // Keine Richtung führt zum Ziel, daher gehe zurück und versuche es an anderer
-    // Stelle
+    // Backtracking: Position als nicht Teil des endgültigen Pfads markieren
+    matrix[row][col] = ".";
+
+    // Matrix nach dem Zurückgehen erneut anzeigen
+    printMatrix(matrix);
+
+    return true;
   }
 
   public static void readFileToMatrix(File file, String[][] matrix, int zeilen, int laenge) {
@@ -114,7 +130,8 @@ public class Functions {
 
     for (int i = 0; i < matrix.length; i++) {
       for (int j = 0; j < matrix[i].length; j++) {
-        // Wenn der Wert null ist, geben wir einen Platzhalter wie "*" aus, andernfalls das Zeichen
+        // Wenn der Wert null ist, geben wir einen Platzhalter wie "*" aus, andernfalls das
+        // Zeichen
         System.out.print((matrix[i][j] != null ? matrix[i][j] : "*"));
       }
       System.out.println(); // Zeilenumbruch nach jeder Zeile
