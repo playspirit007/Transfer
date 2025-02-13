@@ -21,11 +21,13 @@ public class Functions {
     }
 
     myScanner.nextLine();
-    int i = 1;
-    while (i < 7) {
-      System.out.println(" ");
-      i++;
-    }
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+    //    int i = 1;
+    //    while (i < 7) {
+    //      System.out.println(" ");
+    //      i++;
+    //    }
 
     // Position als String speichern (z. B. "2,3")
     String position = row + "," + col;
