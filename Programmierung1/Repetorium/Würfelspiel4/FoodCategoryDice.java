@@ -4,12 +4,12 @@ import java.util.Random;
 
 public class FoodCategoryDice {
 
-  private static final FoodCategory[] CATEGORIES = FoodCategory.values();
-  private static final Random RANDOM = new Random();
-
   public FoodCategory rollTheDice() {
-    int index = RANDOM.nextInt(CATEGORIES.length);
-    return CATEGORIES[index];
+    var myRandom = new Random();
+    FoodCategory[] categories = FoodCategory.values();
+    int index = myRandom.nextInt(categories.length);
+
+    return categories[index];
   }
 }
 
