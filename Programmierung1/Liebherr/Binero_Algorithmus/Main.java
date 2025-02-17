@@ -1,17 +1,13 @@
 package Binero_Algorithmus;
 
 public class Main {
-
   public static void main(String[] args) {
-    var function = new Functions();
-    char[][] Binero = function.BineroMatrix();
+    Functions solver = new Functions();
+    char[][] bineroMatrix = solver.erzeugeBineroMatrix();
+
     System.out.println("Vor Beginn:");
-    function.printBinero(Binero);
+    solver.bineroDrucken(bineroMatrix);
 
-    function.lösenBinero(Binero);
-
-    System.out.println(" ");
-    System.out.println("Lösung: ");
-    function.printBinero(Binero);
+    solver.lösenBinero(bineroMatrix);
   }
 }
