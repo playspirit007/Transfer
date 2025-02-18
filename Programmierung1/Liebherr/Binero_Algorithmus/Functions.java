@@ -9,15 +9,18 @@ public class Functions {
   private Random zufall = new Random();
   private Set<String> lösungen = new HashSet<>(); // Set für gefundene Lösungen
   private final int MAX_LÖSUNGEN = 10; // Maximale Anzahl der Lösungen
+  private int durchlauf = 0;
 
   // Startmethode, um das Binero-Rätsel zu lösen
   public void lösenBinero(char[][] binero) {
     sucheLösungen(binero, 0, 0); // Starte die Lösungssuche von der ersten Zelle
     lösungenAusgeben(); // Lösungen ausgeben
+    System.out.println("Durchlauf: " + durchlauf);
   }
 
   // Rekursive Methode, um alle Lösungen zu suchen
   public void sucheLösungen(char[][] binero, int zeile, int spalte) {
+    durchlauf++;
     if (lösungen.size() >= MAX_LÖSUNGEN) {
       System.out.println("Maximale Lösungen erreicht!");
       return;
