@@ -6,8 +6,8 @@ public class Main {
     char[][] bineroMatrix = solver.erzeugeBineroMatrix();
 
     System.out.println("Vor Beginn:");
-    solver.bineroDrucken(bineroMatrix);
 
+    solver.bineroDrucken(bineroMatrix);
     solver.lösenBinero(bineroMatrix);
   }
 }

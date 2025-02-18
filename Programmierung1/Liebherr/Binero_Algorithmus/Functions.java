@@ -1,152 +1,168 @@
 package Binero_Algorithmus;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
 public class Functions {
 
-  private Set<List<List<Character>>> lösungen =
-      new HashSet<>(); // Set für gefundene Lösungen als 2D-Array
-  private Random zufall = new Random(); // Zufallsgenerator
+  private Random zufall = new Random();
+  private Set<String> lösungen = new HashSet<>(); // Set für gefundene Lösungen
   private final int MAX_LÖSUNGEN = 10; // Maximale Anzahl der Lösungen
 
   // Startmethode, um das Binero-Rätsel zu lösen
   public void lösenBinero(char[][] binero) {
-    List<int[]> leereFelder = findeLeereFelder(binero); // Finde alle leeren Felder
-    sucheLösungen(binero, leereFelder, 0); // Starte die Lösungssuche
+    sucheLösungen(binero, 0, 0); // Starte die Lösungssuche von der ersten Zelle
     lösungenAusgeben(); // Lösungen ausgeben
   }
 
-  // Findet alle leeren Felder (Felder mit '\u0000')
-  private List<int[]> findeLeereFelder(char[][] binero) {
-    List<int[]> leereFelder = new ArrayList<>();
-    for (int zeile = 0; zeile < binero.length; zeile++) {
-      for (int spalte = 0; spalte < binero[zeile].length; spalte++) {
-        if (binero[zeile][spalte] == '\u0000') {
-          leereFelder.add(new int[] {zeile, spalte});
-        }
-      }
-    }
-    return leereFelder;
-  }
-
-  // Verschiedene Lösungen suchen
-  private void sucheLösungen(char[][] binero, List<int[]> leereFelder, int index) {
+  // Rekursive Methode, um alle Lösungen zu suchen
+  public void sucheLösungen(char[][] binero, int zeile, int spalte) {
     if (lösungen.size() >= MAX_LÖSUNGEN) {
-      return; // Abbruch nach 10 Lösungen
+      System.out.println("Maximale Lösungen erreicht!");
+      return;
     }
 
-    if (index >= leereFelder.size()) { // Wenn alle Felder gefüllt sind, Lösung speichern
+    // Wenn das Ende der Matrix erreicht ist, speichern wir die Lösung
+    if (zeile == binero.length) {
       lösungSpeichern(binero);
       return;
     }
 
-    int[] feld = leereFelder.get(index); // Aktuelles Feld
-    int zeile = feld[0];
-    int spalte = feld[1];
+    // Wenn wir das Ende der Spalte erreicht haben, gehen wir zur nächsten Zeile
+    if (spalte == binero[zeile].length) {
+      sucheLösungen(binero, zeile + 1, 0);
+      return;
+    }
 
-    // Zufällige Auswahl zwischen '0' und '1'
-    for (int i = 0; i < 2; i++) {
-      char zahl = zufall.nextBoolean() ? '0' : '1'; // Zufällige Auswahl zwischen 0 und 1
-
-      // Überprüfen, ob die Zahl in Reihe, Spalte und benachbarten Feldern gültig ist
-      if (zahlInReihe(binero, zeile, zahl)
-          && zahlInSpalte(binero, spalte, zahl)
-          && zahlNebenAn(binero, zeile, spalte, zahl)) {
-
-        binero[zeile][spalte] = zahl; // Zahl setzen
-        sucheLösungen(binero, leereFelder, index + 1); // Rekursiver Aufruf
-        binero[zeile][spalte] = '\u0000'; // Rücksetzen der Entscheidung (Backtracking)
+    // Wenn das Feld leer ist, versuchen wir, es mit einer '0' oder '1' zu füllen
+    if (binero[zeile][spalte] == '\u0000') {
+      for (char zahl : new char[] {'0', '1'}) {
+        if (zahlInReihe(binero, zeile, zahl)
+            && zahlInSpalte(binero, spalte, zahl)
+            && zahlNebenAn(binero, zeile, spalte, zahl)) {
+          binero[zeile][spalte] = zahl;
+          sucheLösungen(binero, zeile, spalte + 1);
+          binero[zeile][spalte] = '\u0000'; // Zurücksetzen
+        }
       }
+    } else {
+      // Wenn das Feld schon gefüllt ist, überspringen wir es
+      sucheLösungen(binero, zeile, spalte + 1);
     }
   }
 
   // Speichert eine Lösung, wenn sie noch nicht existiert
   private void lösungSpeichern(char[][] binero) {
-    List<List<Character>> lösung = matrixAlsListe(binero); // Binero-Matrix in eine Liste umwandeln
+    String lösung = matrixAlsString(binero); // Binero-Matrix in einen String umwandeln
     if (!lösungen.contains(lösung)) {
       lösungen.add(lösung); // Nur speichern, wenn Lösung noch nicht vorhanden ist
     }
-  }
-
-  // Wandelt die Binero-Matrix in eine Liste von Listen um
-  private List<List<Character>> matrixAlsListe(char[][] binero) {
-    List<List<Character>> liste = new ArrayList<>();
-    for (char[] zeile : binero) {
-      List<Character> zeilenListe = new ArrayList<>();
-      for (char c : zeile) {
-        zeilenListe.add(c);
-      }
-      liste.add(zeilenListe);
-    }
-    return liste;
   }
 
   // Gibt alle gefundenen Lösungen aus
   public void lösungenAusgeben() {
     System.out.println("\nGefundene Lösungen: " + lösungen.size());
     int counter = 1;
-    for (List<List<Character>> lösung : lösungen) {
+    for (String lösung : lösungen) {
       System.out.println("\nLösung " + counter + ":");
-      matrixDruckenVonListe(lösung); // Lösung als Matrix ausgeben
+      matrixDruckenVonString(lösung); // Lösung als Matrix ausgeben
       counter++;
     }
   }
 
-  // Gibt eine Matrix aus einer Liste von Listen aus
-  private void matrixDruckenVonListe(List<List<Character>> lösung) {
-    for (List<Character> zeile : lösung) {
-      for (Character c : zeile) {
-        System.out.print((c == '\u0000' ? "- " : c + " ")); // Leere Felder mit "-" anzeigen
-      }
-      System.out.println();
-    }
-  }
-
-  // Überprüft Anzahl gleicher Zahlen in Reihe
+  // Überprüft, ob die Zahl in der Reihe gültig ist
   public boolean zahlInReihe(char[][] binero, int zeile, char zahl) {
-    int count = 0;
+    int count0 = 0;
+    int count1 = 0;
     for (char c : binero[zeile]) {
-      if (c == zahl) {
-        count++;
+      if (c == '0') {
+        count0++;
+      } else if (c == '1') {
+        count1++;
       }
     }
-    return count < 6; // Maximal 5 gleiche Zahlen in einer Reihe
+
+    if (zahl == '0') {
+      count0++;
+    } else if (zahl == '1') {
+      count1++;
+    }
+
+    return (count0 <= 5 && count1 <= 5);
   }
 
-  // Überprüft Anzahl gleicher Zahlen in Spalte
+  // Überprüft, ob die Zahl in der Spalte gültig ist
   public boolean zahlInSpalte(char[][] binero, int spalte, char zahl) {
-    int count = 0;
-    for (char[] chars : binero) {
-      if (chars[spalte] == zahl) {
-        count++;
+    int count0 = 0;
+    int count1 = 0;
+    for (int i = 0; i < binero.length; i++) {
+      char temp = binero[i][spalte];
+      if (temp == '0') {
+        count0++;
+      } else if (temp == '1') {
+        count1++;
       }
     }
-    return count < 5; // Maximal 4 gleiche Zahlen in einer Spalte
+
+    if (zahl == '0') {
+      count0++;
+    } else if (zahl == '1') {
+      count1++;
+    }
+
+    return (count0 <= 4 && count1 <= 4);
   }
 
   // Prüft Felder links, rechts, darunter und darüber
   public boolean zahlNebenAn(char[][] binero, int zeile, int spalte, char zahl) {
+    // Überprüfen ob links zwei gleiche Zahlen sind
     if (spalte > 1 && binero[zeile][spalte - 1] == zahl && binero[zeile][spalte - 2] == zahl) {
-      return false; // Nicht erlaubt: zwei gleiche Zahlen nebeneinander
+      return false; // Zwei gleiche Zahlen links
     }
+
+    // Überprüfen ob rechts zwei gleiche Zahlen sind
     if (spalte < binero[zeile].length - 2
         && binero[zeile][spalte + 1] == zahl
         && binero[zeile][spalte + 2] == zahl) {
-      return false; // Nicht erlaubt: zwei gleiche Zahlen nebeneinander
+      return false; // Zwei gleiche Zahlen rechts
     }
+
+    // Überprüfen ob oben zwei gleiche Zahlen sind
     if (zeile > 1 && binero[zeile - 1][spalte] == zahl && binero[zeile - 2][spalte] == zahl) {
-      return false; // Nicht erlaubt: zwei gleiche Zahlen untereinander
+      return false; // Zwei gleiche Zahlen oben
     }
+
+    // Überprüfen ob unten zwei gleiche Zahlen sind
     if (zeile < binero.length - 2
         && binero[zeile + 1][spalte] == zahl
         && binero[zeile + 2][spalte] == zahl) {
-      return false; // Nicht erlaubt: zwei gleiche Zahlen untereinander
+      return false; // Zwei gleiche Zahlen unten
     }
-    return true;
+
+    return true; // Keine zwei gleichen Zahlen benachbart
+  }
+
+  // Speichert die Matrix als einen String, um sie in einem Set zu speichern
+  private String matrixAlsString(char[][] binero) {
+    StringBuilder sb = new StringBuilder();
+    for (char[] zeile : binero) {
+      for (char c : zeile) {
+        sb.append(c == '\u0000' ? '-' : c); // Leere Felder mit '-' darstellen
+      }
+    }
+    return sb.toString();
+  }
+
+  // Gibt die Matrix von einem String aus
+  private void matrixDruckenVonString(String lösung) {
+    int index = 0;
+    for (int zeile = 0; zeile < 8; zeile++) {
+      for (int spalte = 0; spalte < 10; spalte++) {
+        System.out.print(lösung.charAt(index++) + " ");
+      }
+      System.out.println();
+    }
   }
 
   // Erzeugt die Start-Binero-Matrix mit vorgegebenen Zahlen
@@ -176,7 +192,7 @@ public class Functions {
     return binero;
   }
 
-  // Gibt das Binero-Rätsel aus
+  // Ausgabe Start Binero
   public void bineroDrucken(char[][] binero) {
     for (char[] zeile : binero) {
       for (char c : zeile) {
