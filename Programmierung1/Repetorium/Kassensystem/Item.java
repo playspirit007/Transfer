@@ -10,18 +10,21 @@ public class Item {
     this.amount = amount;
   }
 
+  public int getAmount() {
+    return this.amount;
+  }
+
+  public Goods getGoods() {
+    return this.goods;
+  }
+
   public void setAmount(int amount) {
     this.amount = amount;
   }
 
   public double getSubTotalInEuro() {
-    double x = this.amount * goods.getPrice();
-    return x;
-  }
-
-  @Override
-  public String toString() {
-    System.out.println("Good: " + this.goods + " Menge: " + this.amount);
-    return null;
+    double ergebnis = 0;
+    ergebnis = this.goods.getPriceInEuro() * this.amount;
+    return ergebnis;
   }
 }

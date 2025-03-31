@@ -42,7 +42,6 @@ public class Functions {
   protected Integer ausgabeArray(int array[]) {
     for (Integer value : array) {
       System.out.println(value);
-      ;
     }
     return null;
   }

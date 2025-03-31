@@ -20,11 +20,12 @@ public class CashierSystem {
     this.goods.add(goods);
   }
 
-  public void addCashiers(Cashier cashiers) {
-    this.cashiers.add(cashiers);
+  public void addCashier(Cashier cashier) {
+    this.cashiers.add(cashier);
   }
 
   public void login(int id) {
+    Cashier cashier1;
     for (Cashier cashier : cashiers) {
       if (cashier.getId() == id) {
         this.cashier = cashier;
@@ -33,21 +34,24 @@ public class CashierSystem {
   }
 
   public void createShoppingCart() {
-    shoppingCart = new ShoppingCart();
+    ShoppingCart shoppingCart = new ShoppingCart();
   }
 
   public void addItem(int id, int amount) {
-    Goods foundGoods = goods.stream().filter(g -> g.getId() == id).findFirst().orElse(null);
-    if (foundGoods != null) {
-      shoppingCart.createItem(foundGoods, amount);
+    Goods good = null;
+    ShoppingCart shoppingCart = new ShoppingCart();
+    for (Goods good1 : goods) {
+      if (good1.getId() == id) {
+        good = good1;
+      }
     }
+    shoppingCart.createItem(good, amount);
   }
 
   public void printBon() {
-    for (Item items : shoppingCart.getItems()) {
-      System.out.println(items);
-      items.toString();
-      this.shoppingCart.getInTotalEuro();
+    for (Item item : shoppingCart.getItems()) {
+      System.out.println("Menge: %s".formatted(item.getAmount()));
+      System.out.println("Preis in Summe: %s €".formatted(item.getSubTotalInEuro()));
     }
   }
 }
