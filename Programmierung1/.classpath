@@ -8,5 +8,7 @@
 	<classpathentry kind="src" path="Programmierung_I"/>
 	<classpathentry kind="src" path="Repetorium"/>
 	<classpathentry kind="src" path="Liebherr"/>
+	<classpathentry kind="src" path="Programmierung_II_Datenstrukturen_und_Algorithmen"/>
+	<classpathentry kind="src" path="Programmierung_II_Fortgeschrittene_Programmierung"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

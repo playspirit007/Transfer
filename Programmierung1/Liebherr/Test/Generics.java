@@ -24,6 +24,18 @@ public class Generics<T, V, Z> {
     this.objekt3 = objekt;
   }
 
+  public T getT() {
+    return this.objekt1;
+  }
+
+  public V getV() {
+    return this.objekt2;
+  }
+
+  public Z getZ() {
+    return this.objekt3;
+  }
+
   public void printAll() {
     System.out.println(objekt1);
     System.out.println(objekt2);
