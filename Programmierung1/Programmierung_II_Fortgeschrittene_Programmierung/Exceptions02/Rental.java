@@ -1,4 +1,4 @@
-package Exceptions01;
+package Exceptions02;
 
 import java.util.ArrayList;
 

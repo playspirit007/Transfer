@@ -1,4 +1,4 @@
-package Exceptions01;
+package Exceptions02;
 
 public final class Car extends Vehicle {
     private int seats;
