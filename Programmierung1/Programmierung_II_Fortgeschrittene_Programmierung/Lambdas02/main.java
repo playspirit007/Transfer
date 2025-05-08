@@ -3,6 +3,7 @@ package Lambdas02;
 public class main {
 
 public static void main(String[] agrs) {
+	
     Student steffen = new Student("Steffen", 28);
     Student kid = new Student("Kind", 15);
 
