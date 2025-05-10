@@ -20,10 +20,10 @@ public record VideoCollection(ArrayList<Video> videos) {
 		}
 	}
 	
-	public Optional<Video> getVideoByTitle(String title) {
+	public Optional<Movie> getMovieByTitle(String title) {
 	    for (Video v : videos) {
 	        if (v.getMovie().title().equals(title)) {
-	            return Optional.of(v);
+	            return Optional.of(v.getMovie());
 	        }
 	    }
 	    return Optional.empty();
