@@ -1,6 +1,7 @@
 package Shop;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -52,8 +53,9 @@ public record Shop<T extends Comparable<T>>(String name, HashMap<T, ArrayList<In
 	}
   
  public List<T> getAllProductsSortedByNaturalOrdering() {
-	 
-	 return null;
+	 ArrayList<T> ausgabe = new ArrayList<>(assortment.keySet());
+	 Collections.sort(ausgabe);
+	 return ausgabe;
  }
   @Override
   public int compareTo(T o) {

@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import model.Exam;
-import model.Student;
+import model2.Exam;
+import model2.Student;
 
 /**
  * Maps

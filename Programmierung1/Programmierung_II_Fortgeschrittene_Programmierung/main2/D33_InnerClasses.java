@@ -1,14 +1,16 @@
 package main2;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
-import model.InvalidValueException;
-import model.Movie;
-import model.Movie.Genre;
+import model2.Genre;
+import model2.InvalidValueException;
+import model2.Movie;
+import model2.MovieByRatingDescendingComparator;
 
 /**
  * Inner Classes
@@ -42,7 +44,7 @@ public class D33_InnerClasses {
             161146));
 
       /* Outer Class */
-      Collections.sort(movies, new Movie.MovieByRatingDescendingComparator());
+      Collections.sort(movies, new MovieByRatingDescendingComparator());
       System.out.println(movies);
 
       /* Local Class */
