@@ -11,12 +11,7 @@
 	<classpathentry kind="src" path="Programmierung_II_Datenstrukturen_und_Algorithmen"/>
 	<classpathentry kind="src" path="Programmierung_II_Fortgeschrittene_Programmierung"/>
 	<classpathentry kind="src" path="Tutorium"/>
-	<classpathentry kind="lib" path="C:/Users/kh/Downloads/lombok.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/kh/Downloads/google-java-format-eclipse-plugin-1.27.0.jar">
+	<classpathentry kind="lib" path="C:/Users/lwesce13/Downloads/lombok.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
