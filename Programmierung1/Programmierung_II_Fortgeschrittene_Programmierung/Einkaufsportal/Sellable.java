@@ -1,5 +1,5 @@
 package Einkaufsportal;
 
 public interface Sellable {
-	double price();		
+	double priceInEuro();	
 	}
