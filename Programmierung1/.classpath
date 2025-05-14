@@ -11,7 +11,7 @@
 	<classpathentry kind="src" path="Programmierung_II_Datenstrukturen_und_Algorithmen"/>
 	<classpathentry kind="src" path="Programmierung_II_Fortgeschrittene_Programmierung"/>
 	<classpathentry kind="src" path="Tutorium"/>
-	<classpathentry kind="lib" path="C:/Users/lwesce13/Downloads/lombok.jar">
+	<classpathentry kind="lib" path="C:/Users/kh/git_sync/Elias/lombok.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
