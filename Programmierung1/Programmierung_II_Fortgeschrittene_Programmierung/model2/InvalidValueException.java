@@ -1,6 +1,5 @@
 package model2;
 
-
 /**
  * InvalidValueException
  *
@@ -10,10 +9,10 @@ package model2;
  */
 public class InvalidValueException extends Exception {
 
-   private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-   public InvalidValueException(String parameter, Object value) {
-      super("Invalid value " + value + " for parameter " + parameter);
-   }
+	public InvalidValueException(String parameter, Object value) {
+		super("Invalid value " + value + " for parameter " + parameter);
+	}
 
 }
