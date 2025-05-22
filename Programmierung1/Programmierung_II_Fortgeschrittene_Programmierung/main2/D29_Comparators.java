@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import model2.Genre;
+import model2.InvalidValueException;
 import model2.Movie;
 import model2.MovieByRatingDescendingComparator;
 
@@ -16,7 +17,7 @@ import model2.MovieByRatingDescendingComparator;
  */
 public class D29_Comparators {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws InvalidValueException {
     List<Integer> numbers = new ArrayList<>();
     numbers.add(5);
     numbers.add(9);

@@ -14,5 +14,6 @@ public enum Genre {
   ANIMATION,
   DRAMA,
   COMEDY,
-  ADVENTURE
+  ADVENTURE,
+  HORROR
 }
