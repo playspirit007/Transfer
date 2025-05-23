@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
@@ -75,7 +76,29 @@ public record ConsoleQueries(ArrayList<Console> consoles) {
         .average();
   }
 
-  public HashMap<Maker, List<Console>> getAllConsolesByMaker() {
-    return null;
+  public Map<Object, List<Console>> getAllConsolesByMaker() {
+	  return consoles.stream().collect(Collectors.groupingBy(console -> console.maker()));
+  }
+  
+  public Map<Maker, Double> getTotalSoldUnitsInMillionsPerMaker() {
+	  Map<Maker, Double> back = new HashMap<>();
+	  double makerM = 0;
+	  double makerN = 0;
+	  double makerS = 0;
+	  
+	  for (Console c : consoles) {
+		  if (c.maker() == Maker.MICROSOFT) {
+			  makerM += c.soldUnitsInMillions();
+		  } else if (c.maker() == Maker.NINTENDO) {
+			  makerN += c.soldUnitsInMillions();
+		  } else {
+			  makerS += c.soldUnitsInMillions();
+		  }
+		  
+		  back.put(Maker.MICROSOFT, makerM);
+		  back.put(Maker.NINTENDO, makerN);
+		  back.put(Maker.SONY, makerS);
+	  }
+	  return back;
   }
 }
