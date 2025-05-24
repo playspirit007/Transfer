@@ -25,7 +25,8 @@ public class D18_Classes {
     System.out.println(tableLight1.isShining());
     tableLight1.switchOff();
     System.out.println(tableLight1.isShining());
-    LightBulb oldLightBulb = tableLight1.changeLightBulb(redLightBulb);
+    @SuppressWarnings("unused")
+	LightBulb oldLightBulb = tableLight1.changeLightBulb(redLightBulb);
 
   }
 
