@@ -30,5 +30,17 @@ public record CityQueries(List<City> cities) {
 				.mapToDouble(city -> city.areaInKm2()).sum();
 		return area;
 	}
+	
+	public void printCityWithMostPointsOfInterest() {
+		int swk = 0;
+		String nameCity = "";
+		for (City c : cities) {
+			if (c.pointsOfInterest().size() > swk) {
+				swk = c.pointsOfInterest().size();
+				nameCity = c.name();
+			}
+		System.out.println(nameCity + " (" + swk + ")");
+		}
+	}
 
 }
