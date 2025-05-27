@@ -10,33 +10,47 @@ import java.util.stream.Collectors;
 
 public record TankQueries(List<Tank> tanks) {
 
-	public void printAllTanksWithWeightBT25TonsByType() {
-		Map<Type, List<Tank>> back = new HashMap<>();
-		back = tanks.stream().filter(t -> t.weightInTons() >= 25).collect(Collectors.groupingBy(t -> t.type()));
-		back.forEach((t, ts) -> System.out.println(t + ": " + ts));
-	}
+  public void printAllTanksWithWeightBT25TonsByType() {
+    Map<Type, List<Tank>> back = new HashMap<>();
+    back =
+        tanks.stream()
+            .filter(t -> t.weightInTons() >= 25)
+            .collect(Collectors.groupingBy(t -> t.type()));
 
-	public OptionalDouble getAveragePerformanceInHorsePower() {
-		OptionalDouble back = null;
-		back = tanks.stream().mapToDouble(t -> t.performanceInHorsePower()).average();
-		return back;
-	}
+    back.forEach(
+        (ty, t) -> {
+          System.out.println(ty + " :" + t);
+        });
+  }
 
-	List<Nation> getAllNations() {
-		List<Nation> back = new ArrayList<>();
-		back = tanks.stream().map(t -> t.nation()).distinct().toList();
-		return back;
-	}
+  public OptionalDouble getAveragePerformanceInHorsePower() {
+    OptionalDouble back = null;
+    back = tanks.stream().mapToDouble(t -> t.performanceInHorsePower()).average();
+    return back;
+  }
 
-	public boolean isAllTanksMaxSpeedBE50KMH() {
-		return tanks.stream().filter(t -> t.type().equals(Type.BATTLE_TANK)).allMatch(t -> t.maxSpeedInKmh() < 50);
-	}
+  public List<Nation> getAllNations() {
+    List<Nation> back = new ArrayList<>();
+    back = tanks.stream().map(t -> t.nation()).distinct().toList();
+    return back;
+  }
 
-	public void printLongestTankFromGermany() {
-		Optional<Tank> back = null;
-		back = tanks.stream().filter(t -> t.nation().equals(Nation.GER))
-				.max((p1, p2) -> Double.valueOf(p2.lengthInMeters()).compareTo(p1.lengthInMeters()));
+  public boolean isAllTanksMaxSpeedBE50KMH() {
+    return tanks.stream()
+        .allMatch(t -> t.maxSpeedInKmh() >= 50 && t.type().equals(Type.BATTLE_TANK));
+  }
 
-		back.ifPresentOrElse(t -> System.out.println(t.name()), () -> System.out.println("null"));
-	}
+  public void printLongestTankFromGermany() {
+    Optional<Tank> back = null;
+    back =
+        tanks.stream()
+            .filter(t -> t.nation().equals(Nation.GER))
+            .max((t1, t2) -> Double.valueOf(t2.lengthInMeters()).compareTo(t1.lengthInMeters()));
+
+    if (back.isEmpty()) {
+      System.out.println("null");
+    } else {
+      System.out.println(back.get().name());
+    }
+  }
 }

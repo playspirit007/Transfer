@@ -1,5 +1,9 @@
 package Panzer;
 
 public enum Nation {
-	CHN, FRA, GER, SWE, USA;
+  CHN,
+  FRA,
+  GER,
+  SWE,
+  USA;
 }
