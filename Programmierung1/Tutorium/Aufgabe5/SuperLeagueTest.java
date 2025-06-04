@@ -1,5 +1,12 @@
 package Aufgabe5;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
+
+import java.util.HashMap;
+import java.util.List;
+
 import org.mockito.MockitoAnnotations;
 
 public class SuperLeagueTest {
@@ -9,21 +16,26 @@ public class SuperLeagueTest {
   @Mock private Hero ironman;
   @Mock private Hero spiderman;
 
+  @SuppressWarnings({"unchecked", "rawtypes"})
   @BeforeEach
   public void SetUp() {
-	  MockitoAnnotations.openMocks(this);
-	  
-	 
+    MockitoAnnotations.openMocks(this);
+    avengers = new SuperLeague("Avengers", Universe.MARVEL, new HashMap<>());
+    avengers.members().put(ironman, true);
+    avengers.members().put(spiderman, false);
   }
 
   @Test
   public void testAddSuperHuman() {
-	  when(superman.getUniverse()).thenReturn(Universe.DC);
-	  assertThrows(WrongUniverseExecption.class, () -> avengers.addSuperHuman(superman))
+    when(superman.getUniverse()).thenReturn(Universe.DC);
+    assertThrows(WrongUniverseExecption.class, () -> avengers.addSuperHuman(superman));
   }
 
   @Test
-  public void testGetAllAvailableSuperHumans() {}
+  public void testGetAllAvailableSuperHumans() {
+    List<Hero> heroes = avengers.getAllAvailableSuperHumas();
+    assertEquals(1, heroes.size());
+  }
 
   @Test
   public void testGetMostPowerfulSuperHuman() {}
