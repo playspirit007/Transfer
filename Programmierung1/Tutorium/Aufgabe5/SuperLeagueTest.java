@@ -6,7 +6,10 @@ import static org.mockito.Mockito.when;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 public class SuperLeagueTest {
@@ -38,7 +41,11 @@ public class SuperLeagueTest {
   }
 
   @Test
-  public void testGetMostPowerfulSuperHuman() {}
+  public void testGetMostPowerfulSuperHuman() {
+    when(ironman.getPower()).thenReturn(7);
+    when(superman.getPower()).thenReturn(8);
+    assertEquals(Optional.of(spiderman), avengers.getMostPowerfulSuperHuman());
+  }
 
   public SuperLeague<Hero> getAvengers() {
     return avengers;
