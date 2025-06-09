@@ -61,7 +61,7 @@ public class Player {
 					back = Optional.ofNullable(s.getKey());
 				}
 			}
-		return back;
 		}
+		return back;
 	}
 }
