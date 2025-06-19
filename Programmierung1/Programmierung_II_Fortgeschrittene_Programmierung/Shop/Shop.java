@@ -1,61 +1,39 @@
 package Shop;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 
-public record Shop<T extends Comparable<T>>(
-    String name, HashMap<T, ArrayList<Integer>> assortment) {
+public record Shop<T extends Comparable<T>>(String name, Map<T, List<Integer>> assortment) {
 
-  public Shop(String name) {
-    this(name, new HashMap<>());
-  }
-
-  public void addProduct(T product) {
-    assortment.put(product, new ArrayList<>());
-  }
-
-  public void rateProduct(T product, int rating)
-      throws NoProductFoundException, InvalidRatingException {
-    if (product == null) {
-      throw new NoProductFoundException("Kein Produkt gefunden!");
-    } else if (rating > 5 || rating < 1) {
-      throw new InvalidRatingException("Rating ungültig: " + rating);
-    }
-    assortment.computeIfAbsent(product, k -> new ArrayList<>()).add(rating);
-  }
-
-  public Optional<T> getBestRatedProduct() {
-    T bestProduct = null;
-    double bestAverage = 0;
-
-    for (T product : assortment.keySet()) {
-      ArrayList<Integer> ratings = assortment.get(product);
-
-      if (ratings == null || ratings.isEmpty()) {
-        continue;
-      }
-
-      double sum = 0;
-      for (int r : ratings) {
-        sum += r;
-      }
-      double average = sum / ratings.size();
-
-      if (average > bestAverage) {
-        bestAverage = average;
-        bestProduct = product;
-      }
-    }
-
-    return Optional.ofNullable(bestProduct);
-  }
-
-  public List<T> getAllProductsSortedByNaturalOrdering() {
-    ArrayList<T> ausgabe = new ArrayList<>(assortment.keySet());
-    Collections.sort(ausgabe);
-    return ausgabe;
-  }
+	public void addProduct(T product) {
+		for (Entry<T, List<Integer>> s : assortment.entrySet()) {
+			if (s.getKey().equals(product)) {
+				break;
+			}
+		}
+		assortment.put(product, new ArrayList<>());
+	}
+	
+	public void rateProduct(T product, int rating) {
+		for (Entry<T, List<Integer>> s : assortment.entrySet()) {
+			if (s.getKey().equals(product)) {
+				s.getValue().add(rating);
+			}
+		}
+	}
+	
+	public Optional<T> getBestRatedProduct() {
+		Optional<T> back = null;
+		int schnitt = 0;
+		for (Entry<T, List<Integer>> s : assortment.entrySet()) {
+			for (int i : s.getValue()) {
+				schnitt += i;
+			}
+			schnitt = schnitt / s.getValue().size();
+		}
+		return back;
+	}
 }
