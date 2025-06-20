@@ -23,6 +23,8 @@ public record TankQueries(List<Tank> tanks) {
         });
   }
 
+	
+
   public OptionalDouble getAveragePerformanceInHorsePower() {
     OptionalDouble back = null;
     back = tanks.stream().mapToDouble(t -> t.performanceInHorsePower()).average();
@@ -47,10 +49,6 @@ public record TankQueries(List<Tank> tanks) {
             .filter(t -> t.nation().equals(Nation.GER))
             .max((t1, t2) -> Double.valueOf(t2.lengthInMeters()).compareTo(t1.lengthInMeters()));
 
-    if (back.isEmpty()) {
-      System.out.println("null");
-    } else {
-      System.out.println(back.get().name());
-    }
+      System.out.println(Optional.ofNullable(back.get().name()));
   }
 }
