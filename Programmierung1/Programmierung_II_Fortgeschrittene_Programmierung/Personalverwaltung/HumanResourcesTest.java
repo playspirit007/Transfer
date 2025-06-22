@@ -59,7 +59,7 @@ public class HumanResourcesTest {
    }
    
    public void testttAddPerson() {
-	   assertTrue(humanResources.telephoneBook().containsValue(humanResources)t);
+	   assertTrue(humanResources.telephoneBook().containsValue(humanResources));
    }
    
 
