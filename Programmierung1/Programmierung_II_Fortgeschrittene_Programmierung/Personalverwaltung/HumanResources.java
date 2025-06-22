@@ -29,4 +29,5 @@ public record HumanResources(Map<TelephoneNumber, Person> telephoneBook, List<Pe
 		}
 		return back;
 	}
+
 }
